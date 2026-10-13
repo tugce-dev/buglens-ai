@@ -8,9 +8,11 @@ Built with JavaScript, Node.js, Express.js, and the OpenAI API, BugLens transfor
 
 ### 🔗 Live Demo
 
-🚀 **Live Application:** Coming Soon
+🚀 **[Try BugLens AI Live](https://buglens-ai-peza.onrender.com/)**
 
-> The application is currently being prepared for deployment.
+💻 **[View Source Code](https://github.com/tugce-dev/buglens-ai)**
+
+> Note: The application is hosted on Render's free tier. The first request may take a little longer if the server has been inactive.
 
 ---
 
