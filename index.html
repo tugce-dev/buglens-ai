@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BugLens AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form id="bug-form">
+        <div class="demo-banner">
+    <div class="demo-info">
+        <span class="demo-badge">QUICK START</span>
+
+        <h3>New to BugLens?</h3>
+
+        <p>
+            Try a real debugging example and see how
+            BugLens AI finds and explains coding errors.
+        </p>
+    </div>
+
+    <button type="button" id="try-example-btn">
+        ✨ Try an Example
+    </button>
+</div>
+        <label for="bug-description">Describe the bug:</label>
+        <textarea id="bug-description" name="bug-description" rows="4" required></textarea>
+        <label for="code-input">Provide the code snippet:</label>
+        <textarea id="code-input" name="code-input" required rows="10" 
+        placeholder="
+        function greet(name) {
+        console.log("Hello " + name)
+        }"
+></textarea>
+        <button type="submit">Analyze My Code</button>
+        
+    </form>
+    <div id="analysis-result"></div>
+
+    <script src="index.js"></script>
+</body>
+</html>
