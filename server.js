@@ -6,7 +6,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 console.log("API key loaded:", Boolean(process.env.OPENAI_API_KEY));
 
 app.get("/hello", (req, res) => {
@@ -19,7 +19,7 @@ app.post("/api/analyze", async (req, res) => {
   const userDescription = req.body.description;
 
   console.log("Analyze request received!");
-  console.log("Request body:", req.body);
+
 
   try {
     const aiResponse = await fetch("https://api.openai.com/v1/responses", {
@@ -97,6 +97,6 @@ ${userCode}
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server is running on port ${port}`);
 });
