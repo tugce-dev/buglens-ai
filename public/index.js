@@ -47,6 +47,10 @@ analysisResult.innerHTML = `
         </div>
     </div>
 `;
+    analysisResult.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 
     console.log("Form submitted");
 
