@@ -44,7 +44,7 @@ analysisResult.innerHTML = `
     console.log("Bug Data:", bugData);
     console.log("JSON Data:", jsonData);
 
-    fetch("http://localhost:3000/api/analyze",{
+    fetch("/api/analyze",{
         method : "POST",
         headers : { 
             "Content-Type" : "application/json"
