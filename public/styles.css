@@ -1098,3 +1098,26 @@ body::after {
     font-size: 12px;
   }
 }
+
+#bug-description,
+#code-input {
+    overflow-y: auto;
+    resize: vertical;
+}
+
+@media (max-width: 640px) {
+    #code-input {
+        white-space: pre;
+        overflow-x: auto;
+        overflow-wrap: normal;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+}
+
+.changed-line {
+    display: block;
+    background: rgba(52, 211, 153, 0.12);
+    border-left: 3px solid #34d399;
+    padding-left: 8px;
+}

@@ -8,6 +8,14 @@ const analyzeBtn = form.querySelector('button[type="submit"]');
 form.addEventListener("submit", handleSubmit)
 tryExampleBtn.addEventListener("click", loadExample);
 
+codeInput.addEventListener("input", () => {
+    autoResizeTextarea(codeInput);
+});
+
+bugDescription.addEventListener("input", () => {
+    autoResizeTextarea(bugDescription);
+});
+
 function handleSubmit(event) {
     event.preventDefault();
     
@@ -89,14 +97,16 @@ analysisResult.innerHTML = `
     const explanationText = document.querySelector("#explanation-text");
     const locationText = document.querySelector("#location-text");
     const solutionText = document.querySelector("#solution-text");
-    const fixedCodeText = document.querySelector("#fixed-code");
+    const fixedCodeElement = document.querySelector("#fixed-code");
+    fixedCodeElement.replaceChildren(
+    ...highlightChanges(userCode, data.analysis.fixedCode)
+    );
     const learningTipText = document.querySelector("#learning-tip");
 
     errorText.textContent = data.analysis.error;
     explanationText.textContent = data.analysis.explanation;
     locationText.textContent = data.analysis.location ?? "Not identified";
     solutionText.textContent = data.analysis.solution;
-    fixedCodeText.textContent = data.analysis.fixedCode;
     learningTipText.textContent = data.analysis.learningTip;
 
     const prefersReducedMotion = window.matchMedia(
@@ -146,30 +156,35 @@ analysisResult.scrollIntoView({
 }
 
 function loadExample() {
-    const exampleCode = `const products = [
-    { name: "Laptop", price: 1200, inStock: true },
-    { name: "Mouse", price: 25, inStock: false },
-    { name: "Keyboard", price: 80, inStock: true },
-    { name: "Monitor", price: 300, inStock: true }
-];
+    const exampleCode = `async function getUserProfile(userId) {
+    const response = await fetch(\`/api/users/\${userId}\`);
 
-function calculateTotal(items) {
-    const availableProducts = items.filter(item => item.inStock);
+    if (!response.ok) {
+        throw new Error("Failed to fetch user");
+    }
 
-    const total = availableProducts.reduce((sum, item) => {
-        return sum + item.prize;
-    }, 0);
+    const user = response.json();
 
-    return total;
+    return user;
 }
 
-console.log("Total inventory value:", calculateTotal(products));`;
+async function displayUserProfile() {
+    const user = await getUserProfile(42);
 
-    const exampleDescription =
-        "I'm calculating the total value of products that are in stock, but my function returns NaN instead of the expected total. Can you identify the bug, explain why it happens, and show me how to fix it?";
+    console.log("Username:", user.name);
+    console.log("Email:", user.email);
+}
 
+displayUserProfile();`;
+
+const exampleDescription =
+    "I'm fetching user profile data from an API using async/await. The request succeeds, but when I try to access the user's name and email, both values are undefined. I can't figure out why the data isn't available even though the API returns a valid JSON response. Can you identify the bug and explain how to fix it?";
+   
     codeInput.value = exampleCode;
     bugDescription.value = exampleDescription;
+
+    autoResizeTextarea(codeInput);
+    autoResizeTextarea(bugDescription);
 
     analysisResult.innerHTML = "";
 
@@ -177,4 +192,31 @@ console.log("Total inventory value:", calculateTotal(products));`;
         behavior: "smooth",
         block: "center"
     });
+}
+function autoResizeTextarea(textarea) {
+    textarea.style.height = "auto";
+
+    const maxHeight = window.innerWidth <= 640 ? 280 : 500;
+
+    textarea.style.height =
+        Math.min(textarea.scrollHeight, maxHeight) + "px";
+}
+
+function highlightChanges(originalCode, fixedCode) {
+    const originalLines = originalCode.split("\n");
+    const fixedLines = fixedCode.split("\n");
+
+    const changedLines = fixedLines.map((line, index) => {
+        const span = document.createElement("span");
+
+        span.textContent = line + "\n";
+
+        if (line !== originalLines[index]) {
+            span.classList.add("changed-line");
+        }
+
+        return span;
+    });
+
+    return changedLines;
 }
