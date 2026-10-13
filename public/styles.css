@@ -895,3 +895,206 @@ body::after {
     margin-top: 10px;
   }
 }
+
+/* =========================================================
+   BUGLENS AI — MOBILE EXPERIENCE OPTIMIZATION
+   Desktop design remains unchanged
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  /* Overall mobile layout */
+
+  body {
+    padding: 28px 12px 42px;
+  }
+
+  /* Main application container */
+
+  #bug-form {
+    padding: 98px 17px 25px;
+    gap: 10px;
+    border-radius: 20px;
+  }
+
+  /* Branding */
+
+  #bug-form::before {
+    top: 28px;
+    left: 17px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  #bug-form::after {
+    top: 52px;
+    left: 17px;
+    right: 17px;
+    font-size: clamp(17px, 4.6vw, 22px);
+    line-height: 1.3;
+  }
+
+  /* Compact Quick Start card */
+
+  .demo-banner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 13px;
+
+    margin-bottom: 6px;
+    padding: 17px;
+
+    border-radius: 14px;
+  }
+
+  .demo-badge {
+    margin-bottom: 7px;
+    font-size: 9px;
+  }
+
+  .demo-info h3 {
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+
+  .demo-info p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* Quick Start button */
+
+  #bug-form #try-example-btn {
+    width: 100%;
+    min-height: 46px;
+    padding: 11px 16px;
+    font-size: 13px;
+  }
+
+  /* Form labels */
+
+  #bug-form label {
+    margin-top: 9px;
+    font-size: 13px;
+  }
+
+  /* Input fields */
+
+  #bug-form textarea {
+    padding: 13px 14px;
+    border-radius: 12px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* Bug description */
+
+  #bug-description {
+    min-height: 105px;
+    height: 105px;
+  }
+
+  /* Code editor */
+
+  #code-input {
+    min-height: 170px;
+    height: 170px;
+
+    font-size: 13px !important;
+    line-height: 1.65 !important;
+  }
+
+  /* Analyze button */
+
+  #bug-form button[type="submit"] {
+    min-height: 52px;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+
+  /* Analysis results container */
+
+  #analysis-result {
+    grid-template-columns: 1fr;
+    gap: 12px;
+
+    margin-top: 18px;
+    padding: 12px;
+
+    border-radius: 18px;
+  }
+
+  /* Result cards */
+
+  .result-card {
+    grid-column: 1 / -1;
+    padding: 17px;
+    border-radius: 14px;
+  }
+
+  .result-card h3 {
+    margin-bottom: 12px;
+    font-size: 15px;
+  }
+
+  .result-card p {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  /* Fixed code section */
+
+  .result-card:nth-child(5) pre {
+    max-width: 100%;
+    padding: 14px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .result-card:nth-child(5) code {
+    font-size: 12px;
+    line-height: 1.7;
+    white-space: pre;
+  }
+
+  /* Loading state */
+
+  .analysis-loading {
+    padding: 18px;
+    gap: 14px;
+    min-height: auto;
+  }
+
+  .loading-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .loading-icon span {
+    font-size: 24px;
+  }
+
+  .loading-content h3 {
+    font-size: 16px;
+  }
+
+}
+@media (max-width: 640px) {
+  .result-card:nth-child(5) {
+    padding: 14px;
+  }
+
+  .result-card:nth-child(5) pre {
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: #8c82ff #080e1c;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .result-card:nth-child(5) code {
+    white-space: pre;
+    font-size: 12px;
+  }
+}

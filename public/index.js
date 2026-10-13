@@ -41,8 +41,7 @@ analysisResult.innerHTML = `
 `;
 
     console.log("Form submitted");
-    console.log("Bug Data:", bugData);
-    console.log("JSON Data:", jsonData);
+
 
     fetch("/api/analyze",{
         method : "POST",
@@ -57,7 +56,7 @@ analysisResult.innerHTML = `
         throw new Error(data.message || "Analysis failed.");
 
     }
-          console.log("Response from server:", data);
+  
          
           analysisResult.innerHTML = `
     <div class="result-card">
@@ -99,6 +98,15 @@ analysisResult.innerHTML = `
     solutionText.textContent = data.analysis.solution;
     fixedCodeText.textContent = data.analysis.fixedCode;
     learningTipText.textContent = data.analysis.learningTip;
+
+    const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+).matches;
+
+analysisResult.scrollIntoView({
+    behavior: prefersReducedMotion ? "auto" : "smooth",
+    block: "start"
+});
       }).catch(error => {
 
     console.error("BugLens Error:", error);
