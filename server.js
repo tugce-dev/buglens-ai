@@ -1,10 +1,23 @@
 const express = require("express");
 const cors = require("cors");
+const { rateLimit } = require("express-rate-limit");
 
 const app = express();
+app.set("trust proxy", 1);
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
+
+const analyzeLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 5,
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message: "Too many analysis requests. Please try again in 15 minutes."
+  }
+});
 
 const port = process.env.PORT || 3000;
 console.log("API key loaded:", Boolean(process.env.OPENAI_API_KEY));
@@ -14,7 +27,7 @@ app.get("/hello", (req, res) => {
   res.send("Hello, from BugLens AI!");
 });
 
-app.post("/api/analyze", async (req, res) => {
+app.post("/api/analyze", analyzeLimiter, async (req, res) => {
   const userCode = req.body.code;
   const userDescription = req.body.description;
 
